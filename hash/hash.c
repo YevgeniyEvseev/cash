@@ -4,9 +4,9 @@
 
 #include "../cash.h"
 
-int *hash_init() {
+page **hash_init() {
   int lenght = 1 << HASH_SIZE_BIT;
-  return malloc(lenght * sizeof(int));
+  return malloc(lenght * sizeof(page *));
 }
 
 int hash_str(char *str, unsigned a, unsigned b) {
@@ -22,5 +22,18 @@ int hash_str(char *str, unsigned a, unsigned b) {
   return (sum_hash * a + b) >> (32 - HASH_SIZE_BIT);
 }
 
-int insert_hash(char *str) {}
-int search_hash(char *str) {}
+// int insert_hash(int **hash, int id, page *p) {
+
+//}
+
+int search_hash(page **hash, page *p) {
+  int id_new = hash_int(p->index, 231, 1210432);
+  if (hash[id_new] != NULL) {
+    return 1;
+  }
+  hash[id_new] = p;
+}
+
+int hash_int(int n, unsigned a, unsigned b) {
+  return (a * n + b) >> (32 - HASH_SIZE_BIT);
+}
