@@ -22,16 +22,31 @@ int hash_str(char *str, unsigned a, unsigned b) {
   return (sum_hash * a + b) >> (32 - HASH_SIZE_BIT);
 }
 
-// int insert_hash(int **hash, int id, page *p) {
-
-//}
-
-int search_hash(page **hash, page *p) {
-  int id_new = hash_int(p->index, 231, 1210432);
-  if (hash[id_new] != NULL) {
+int insert_hash(page **hash, page *p) {
+  if (search_hash(hash, p)) {
+    // fprintf(stderr, "collition");
+    
     return 1;
   }
-  hash[id_new] = p;
+  return 0;
+}
+
+int search_hash(page **hash, page *p) {
+  int id = hash_int(p->index, K1_HASH, K2_HASH);
+  if (hash[id] != NULL) {
+    return id;
+  }
+  hash[id] = p;
+  return 0;
+}
+
+void drop_hash(page **hash, page *p) {
+  int id = hash_int(p->index, K1_HASH, K2_HASH);
+  if (hash[id] == NULL) {
+    printf("hash id is empty");
+    abort();
+  }
+  hash[id] = NULL;
 }
 
 int hash_int(int n, unsigned a, unsigned b) {
