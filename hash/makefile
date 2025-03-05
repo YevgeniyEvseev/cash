@@ -3,6 +3,7 @@ object = hash.o main.o
 
 hash: clear $(object) 
 	$(C_flag) -o hash $(object)
+	./hash
 
 hash.o: hash.c 
 	$(C_flag) -c hash.c 
