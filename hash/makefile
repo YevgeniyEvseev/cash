@@ -1,4 +1,4 @@
-C_flag = gcc -Wall -Werror -Wextra
+C_flag = gcc -Wall  -Wextra
 object = hash.o main.o
 
 hash: clear $(object) 

@@ -6,34 +6,36 @@
 
 void hash_init(hash_list **hash, const param_hash *value) {
   int lenght = 1 << value->size_in_bit;
-  hash = calloc(lenght, sizeof(hash_list *));
+  *hash = calloc(lenght, sizeof(hash_list *));
 }
 
-void insert_hash(hash_list **hash, const param_hash *value, page *p) {
+void insert_hash(hash_list *hash, const param_hash *value, page *p) {
   int i = search_hash(hash, value, p);
-  if (i != -1) return;  // page entry in hash
-  hash_list *node = malloc(sizeof(hash_list));
-  node->value = p;
-  node->next = NULL;
-  if (hash[i] == NULL) {
-    hash[i] = node;
+  if (i == -1) i = hash_int(p->index, value);
+
+  if ((hash + i)->value == NULL) {
+    (hash + i)->value = p;
+    (hash + i)->next = NULL;
     return;
   }
-  hash_list *tmp = hash[i];
+  hash_list *tmp = hash + i;
   while (tmp->next != NULL) {
     tmp = tmp->next;
   }
+  hash_list *node = malloc(sizeof(hash_list));
+  node->value = p;
+  node->next = NULL;
   tmp->next = node;
 }
-int search_hash(hash_list **hash, const param_hash *value, page *p) {
+int search_hash(hash_list *hash, const param_hash *value, page *p) {
   int i = hash_int(p->index, value);
-  hash_list *tmp = hash[i];
-  if (tmp != NULL) {
-    while (tmp->value->index != p->index) {
-      if (tmp->next == NULL) return -1;
-      tmp = tmp->next;
-    }
+  hash_list *tmp = hash + i;
+  if (tmp->value == NULL) return -1;
+  while (tmp->value->index != p->index) {
+    if (tmp->next == NULL) return -1;
+    tmp = tmp->next;
   }
+
   return i;
 }
 
@@ -43,8 +45,8 @@ void set_param(param_hash *value, unsigned k1, unsigned k2, unsigned length) {
   value->k2 = k2;
   value->size_in_bit = length;
 }
-int hash_int(int n, const param_hash *value) {
-  return (value->k1 * n + value->k2) >> (32 - value->size_in_bit);
+unsigned hash_int(int n, const param_hash *value) {
+  return (value->k1 * (unsigned)n + value->k2) >> (32 - value->size_in_bit);
 }
 
 int hash_str(char *str, const param_hash *value) {
@@ -58,4 +60,8 @@ int hash_str(char *str, const param_hash *value) {
     // printf("%d\n", sum_hash);
   }
   return (sum_hash * value->k1 + value->k2) >> (32 - value->size_in_bit);
+}
+
+void slow_get_page(int n, page *p){
+  
 }

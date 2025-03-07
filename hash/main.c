@@ -5,16 +5,21 @@
 #include "../cash.h"
 
 int main() {
-  int count = 2;
-
-  //page **p = hash_init();
-  for (int i = 0; i < 10000000; i++) {
-    page *tmp = malloc(sizeof(page));
-    tmp->index = i;
-    strcpy(tmp->data, "aaaaaaaaaaaaaaaaaa");
-    count += insert_hash(p, tmp);
+  page p[10000] = {0};
+  for (int i = 0; i < 10000; ++i) {
+    strcpy(p[i].data, "aaaaaaaaaaaaaaaaaa");
+    p[i].index = i;
   }
-  printf("collition =%d", count);
+  hash_list *hash = NULL;
+  param_hash value;
+  set_param(&value, 117657, 16777216, 8);
+  hash_init(&hash, &value);
+
+  for (int i = 0; i < 10000; i++) {
+    insert_hash(hash, &value, &p[i]);
+  }
+  int c = search_hash(hash, &value, &p[6511]);
+  printf("collition =%d", c);
 #if 0
   for (int i = 0; i < 10000000; i++) {
     i *= 2;

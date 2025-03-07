@@ -33,11 +33,11 @@ void slow_get_page(int n, page *p);
 void get_page(int id, page *p);
 
 // search page by id. return
-int insert_hash(hash_list **hash, const param_hash *value, page *p);
+void insert_hash(hash_list *hash, const param_hash *value, page *p);
 void hash_init(hash_list **hash, const param_hash *value);
 void set_param(param_hash *value, unsigned k1, unsigned k2, unsigned length);
-int search_hash(hash_list **hash, const param_hash *value, page *p);
+int search_hash(hash_list *hash, const param_hash *value, page *p);
 int hash_str(char *str, const param_hash *value);
-int hash_int(int n, const param_hash *value);
+unsigned hash_int(int n, const param_hash *value);
 // void delete_hash(page **hash, page *p);
 #endif
