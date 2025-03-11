@@ -1,6 +1,8 @@
 #ifndef CASH_H
 #define CASH_H
 
+#define FALSE 0
+#define TRUE 1
 #define HASH_SIZE_BIT 25
 #define POLINOM 23
 #define SIZE_INT 32
@@ -49,7 +51,7 @@ void clear_hash(hash_list **hash);
 
 void create_cash(cash_page **root, page *hash);
 void insert_list(cash_page **root, page *hash);
-void move_list(cash_page *p_list1, cash_page *p_list2);
+void swap_list(cash_page **root, cash_page *p_list);
 void drop_list(cash_page *root, page *hash);
 
 #endif
