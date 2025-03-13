@@ -4,12 +4,12 @@ SOURCES=main.c list_page.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=list
 
-all: clear $(EXECUTABLE)
+all: clear $(EXECUTABLE) test
         
 $(EXECUTABLE): main.o list_page.o
 	$(CC) main.o list_page.o -o list
 test: list_page.o
-	$(CC) test.c list_page.c -o test $(LDFLAGS)
+	$(CC) test.c list_page.c -o test $(LDFLAGS) 
 
 list_page.o:
 	$(CC) -c list_page.c 
@@ -19,4 +19,5 @@ main.o:
 
 
 clear:
-	rm -rf *.o 
+	rm -rf *.o
+	rm -rf list test

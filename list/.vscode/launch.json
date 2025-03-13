@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "./list_test",
+            "program": "./list",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

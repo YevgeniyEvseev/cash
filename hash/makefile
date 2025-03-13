@@ -13,3 +13,4 @@ list.o: ../list/list_page.c
 	$(C_flag) -c ../list/list_page.c 
 clear: 
 	rm -rf *.o
+	rm -rf hash 

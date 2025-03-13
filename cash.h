@@ -3,11 +3,11 @@
 
 #define FALSE 0
 #define TRUE 1
-#define HASH_SIZE_BIT 25
+#define HASH_SIZE_BIT 8
 #define POLINOM 23
 #define SIZE_INT 32
-#define K1_HASH 23111
-#define K2_HASH 123453
+#define K1_HASH 167657
+#define K2_HASH 16777216
 
 typedef struct {
   int index;
@@ -32,6 +32,11 @@ typedef struct node {
   cash_page *value;
 } hash_list;
 
+typedef struct {
+  hash_list *list;
+  cash_page *root;
+} Cash_t;
+
 // void slow_get_page(int n, page *p);
 void get_page(int id, page **p, hash_list *hash);
 
@@ -49,9 +54,12 @@ void clear_hash(hash_list **hash);
 
 //----------------LIST------------------
 
-void create_cash(cash_page **root, page *hash);
+void list_init(cash_page **root, page *hash);
 void insert_list(cash_page **root, page *hash);
 void swap_list(cash_page **root, cash_page *p_list);
-void drop_list(cash_page *root, page *hash);
+void delete_list(cash_page **root, cash_page *hash);
+void clear_list(cash_page **root);
+
+//---------------CASH-------------------
 
 #endif

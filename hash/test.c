@@ -15,7 +15,7 @@ int main() {
   cash_page *cash = NULL;
   set_param(&value, 167657, 16777216, 8);
   hash_init(&hash, &value);
-  create_cash(&cash, p);
+  list_init(&cash, p);
 
   for (int i = 0; i < 10000; i++) {
     insert_list(&cash, &p[i]);
