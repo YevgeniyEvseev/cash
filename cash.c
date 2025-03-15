@@ -30,14 +30,14 @@ void manager_cash(Cash_t *cash, page *key) {
   static int n = 1;
   int length = 1 << cash->list->param->size_in_bit;
   hash_list *found_node = search_hash(cash->list, key->index);
-  cash_page *tmp = found_node->value;
   if (found_node == NULL) {
     insert_list(&cash->root, key);
     insert_hash(cash->list, cash->root);
   } else {
-    swap_list(cash->root, found_node);
+    swap_list(&cash->root, found_node->value);
   }
-  if (n > length && found_node == NULL) {
+  if (n > length && found_node != NULL) {
+    cash_page *tmp = found_node->value;
     delete_hash(cash->list, key->index);
     delete_list(&cash->root, tmp);
   } else {

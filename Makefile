@@ -10,9 +10,11 @@ cash.o: cash.c
 hash.o: ./hash/hash.c 
 	$(C_flag) -c ./hash/hash.c 
 main.o: main.c 
-	$(C_flag) -c test.c
+	$(C_flag) -c main.c
 list.o: ./list/list_page.c 
 	$(C_flag) -c ./list/list_page.c 
 clear: 
 	rm -rf *.o
-	rm -rf hash 
+	rm -rf ./hash/*.o 
+	rm -rf ./list/*.o
+	rm -f cash 
