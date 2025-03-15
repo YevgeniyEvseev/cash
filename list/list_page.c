@@ -4,6 +4,10 @@
 #include "../cash.h"
 
 void list_init(cash_page **root, page *p) {
+  if (*root != NULL) {
+    fprintf(stderr, "constructor Alarm!!! cash list is not NULL");
+    return;
+  }
   *root = malloc(sizeof(cash_page));
   (*root)->data = p;
   (*root)->next = NULL;

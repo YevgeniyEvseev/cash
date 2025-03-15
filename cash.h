@@ -62,4 +62,10 @@ void clear_list(cash_page **root);
 
 //---------------CASH-------------------
 
+void manager_cash(Cash_t *cash, page *key);
+void cash_cstr_param(Cash_t *cash, page *p, unsigned k1, unsigned k2,
+                     unsigned size);
+void cash_cstr(Cash_t *cash, page *p);
+void create_cash(Cash_t **cash);
+
 #endif
