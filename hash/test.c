@@ -5,8 +5,8 @@
 #include "../cash.h"
 
 int main() {
-  page p[10000] = {0};
-  for (int i = 0; i < 10000; ++i) {
+  page p[300] = {0};
+  for (int i = 0; i < 100000; ++i) {
     strcpy(p[i].data, "aaaaaaaaaaaaaaaaaa");
     p[i].index = i;
   }

@@ -34,13 +34,22 @@ void manager_cash(Cash_t *cash, page *key) {
     insert_list(&cash->root, key);
     insert_hash(cash->list, cash->root);
   } else {
-    swap_list(&cash->root, found_node->value);
+    move_node(&cash->root, found_node->value);
   }
-  if (n > length && found_node != NULL) {
-    cash_page *tmp = found_node->value;
-    delete_hash(cash->list, key->index);
-    delete_list(&cash->root, tmp);
+  if (n > length && found_node == NULL) {
+    cash_page *last_node = cash->root;
+    while (last_node->next != NULL) {
+      last_node = last_node->next;
+    }
+    delete_hash(cash->list, last_node->data->index);
+    delete_list(&cash->root, last_node);
   } else {
     n++;
   }
+}
+
+void clear_cash(Cash_t **cash) {
+  clear_hash(&(*cash)->list);
+  clear_list(&(*cash)->root);
+  free(*cash);
 }

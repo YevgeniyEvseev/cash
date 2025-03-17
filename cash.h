@@ -59,6 +59,8 @@ void insert_list(cash_page **root, page *hash);
 void swap_list(cash_page **root, cash_page *p_list);
 void delete_list(cash_page **root, cash_page *hash);
 void clear_list(cash_page **root);
+void print_list(cash_page *root, int count);
+void move_node(cash_page **root, cash_page *p_list);
 
 //---------------CASH-------------------
 
@@ -67,5 +69,6 @@ void cash_cstr_param(Cash_t *cash, page *p, unsigned k1, unsigned k2,
                      unsigned size);
 void cash_cstr(Cash_t *cash, page *p);
 void create_cash(Cash_t **cash);
+void clear_cash(Cash_t **cash);
 
 #endif

@@ -4,8 +4,6 @@
 
 #include "../cash.h"
 
-
-
 void hash_init(hash_list **hash, param_hash *value) {
   int lenght = 1 << value->size_in_bit;
   *hash = calloc(lenght, sizeof(hash_list));
@@ -111,5 +109,6 @@ void clear_hash(hash_list **hash) {
       free(prev);
     } while (tmp != NULL);
   }
+  free((*hash)->param);
   free(*hash);
 }

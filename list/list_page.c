@@ -66,3 +66,23 @@ void clear_list(cash_page **root) {
     delete_list(root, *root);
   }
 }
+
+void print_list(cash_page *root, int count) {
+  cash_page *tmp = root;
+  int i = 0;
+  while (tmp != NULL && i++ < count) {
+    printf("%d ", tmp->data->index);
+    tmp = tmp->next;
+  }
+  printf("\n");
+}
+
+void move_node(cash_page **root, cash_page *p_list) {
+  if (p_list == *root) return;
+  if (p_list->next != NULL) p_list->next->prev = p_list->prev;
+  p_list->prev->next = p_list->next;
+  (*root)->prev = p_list;
+  p_list->next = (*root);
+  p_list->prev = NULL;
+  *root = p_list;
+}

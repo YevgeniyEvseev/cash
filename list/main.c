@@ -11,8 +11,10 @@ int main() {
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root->next;
-
-  delete_list(&root, node);
+  cash_page *node = root->next->next->next;
+  print_list(root, 5);
+  swap_list(&root, node);
+  print_list(root, 5);
+  // delete_list(&root, node);
   clear_list(&root);
 }
