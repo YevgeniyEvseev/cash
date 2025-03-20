@@ -63,7 +63,7 @@ START_TEST(CASH_TRUE3) {
   get_page(2, &p_find, cash->list);
   ck_assert_int_eq(-1, (p_find == NULL) ? -1 : p_find->index);
   ck_assert_int_eq(295, cash->root->data->index);
-  cash_page *tmp = cash->root->next;
+  list_page *tmp = cash->root->next;
   ck_assert_int_eq(297, tmp->data->index);
   tmp = tmp->next;
   ck_assert_int_eq(299, tmp->data->index);
@@ -91,7 +91,7 @@ START_TEST(CASH_TRUE4) {
   }
   manager_cash(cash, p + 297);
   manager_cash(cash, p + 295);
-  cash_page *last = cash->root->next;
+  list_page *last = cash->root->next;
   while (last->next != NULL) {
     last = last->next;
   }
@@ -114,7 +114,7 @@ START_TEST(CASH_TRUE5) {
   }
   manager_cash(cash, p + 297);
   manager_cash(cash, p + 44);
-  cash_page *last = cash->root->next;
+  list_page *last = cash->root->next;
   while (last->next != NULL) {
     last = last->next;
   }
@@ -152,5 +152,5 @@ int main() {
   srunner_run_all(sr, CK_NORMAL);
   number_failed = srunner_ntests_failed(sr);
   srunner_free(sr);
-  return (number_failed == 0) ? TRUE : FALSE;
+  return (number_failed == 0) ? 1 : 0;
 }

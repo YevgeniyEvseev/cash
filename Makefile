@@ -1,5 +1,5 @@
 CC = gcc -Wall  -Wextra -g
-object = ./hash/hash.o cash.o ./list/list_page.o
+object = ./hash/source/hash.o cash.o ./list/source/list_page.o
 LDFLAGS= -lcheck -lsubunit -lrt -lpthread -lm
 
 all: hash test
@@ -16,12 +16,12 @@ test.o: test.c
 
 cash.o: cash.c 
 	$(CC) -c cash.c 
-hash.o: ./hash/hash.c 
-	$(CC) -c ./hash/hash.c 
+hash.o: ./hash/source/hash.c 
+	$(CC) -c ./hash/source/hash.c 
 main.o: main.c 
 	$(CC) -c main.c
-list.o: ./list/list_page.c 
-	$(CC) -c ./list/list_page.c 
+list.o: ./list/source/list_page.c 
+	$(CC) -c ./list/source/list_page.c 
 clear: 
 	rm -rf *.o
 	rm -rf ./hash/*.o 

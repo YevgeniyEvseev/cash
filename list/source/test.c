@@ -4,11 +4,11 @@
 #include <string.h>
 #include <time.h>
 
-#include "../cash.h"
+#include "list_page.h"
 
 START_TEST(INSERT_LIST) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
@@ -29,13 +29,13 @@ END_TEST
 
 START_TEST(SWAP_LIST) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root->next->next;
+  list_page *node = root->next->next;
   swap_list(&root, node);
   ck_assert_int_eq(3, root->data->index);
 
@@ -62,13 +62,13 @@ END_TEST
 
 START_TEST(SWAP_LIST2) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root;
+  list_page *node = root;
   while (node->next != NULL) {
     node = node->next;
   }
@@ -81,13 +81,13 @@ END_TEST
 
 START_TEST(SWAP_LIST3) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root;
+  list_page *node = root;
 
   swap_list(&root, node);
   ck_assert_int_eq(5, root->data->index);
@@ -97,13 +97,13 @@ END_TEST
 
 START_TEST(delete_LIST) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root->next;
+  list_page *node = root->next;
 
   delete_list(&root, node);
   ck_assert_int_eq(3, root->next->data->index);
@@ -114,13 +114,13 @@ END_TEST
 
 START_TEST(delete_LIST2) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root;
+  list_page *node = root;
 
   delete_list(&root, node);
   ck_assert_int_eq(3, root->next->data->index);
@@ -131,13 +131,13 @@ END_TEST
 
 START_TEST(delete_LIST3) {
   page p[5] = {0};
-  cash_page *root = NULL;
+  list_page *root = NULL;
   for (int i = 1; i < 6; ++i) {
     p[i - 1].index = i;
     strcpy(p[i - 1].data, "aaaaaaaaaaaaaa");
     insert_list(&root, p + i - 1);
   }
-  cash_page *node = root;
+  list_page *node = root;
   while (node->next != NULL) {
     node = node->next;
   }
@@ -184,5 +184,5 @@ int main() {
   srunner_run_all(sr, CK_NORMAL);
   number_failed = srunner_ntests_failed(sr);
   srunner_free(sr);
-  return (number_failed == 0) ? TRUE : FALSE;
+  return (number_failed == 0) ? 1 : 0;
 }
